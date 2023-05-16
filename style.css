@@ -1,0 +1,17 @@
+.maze {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  width: fit-content;
+  height: 600px;
+}
+
+.maze .cell {
+  width: 20px;
+  height: 20px;
+}
+.wall {
+  background-color: black;
+}
+.way {
+  background-color: white;
+}
