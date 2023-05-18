@@ -1,4 +1,92 @@
-$(document).ready(function () {
+addEventListener("load", () => {
+  var check1 = false;
+
+  function checkingTop() {
+    let walls = document.querySelectorAll(".wall");
+    let minion = document.querySelector(".minion");
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
+      const rect2 = wall.getBoundingClientRect();
+      const rect = minion.getBoundingClientRect();
+      if (
+        rect.top == rect2.bottom &&
+        (rect.right == rect2.left || rect.right == rect2.left + 10)
+      ) {
+        check1 = false;
+        break; // Exit the loop when the condition is met
+      } else {
+        check1 = true;
+      }
+    }
+  }
+  function checkingBottom() {
+    let walls = document.querySelectorAll(".wall");
+    let minion = document.querySelector(".minion");
+
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
+      const rect2 = wall.getBoundingClientRect();
+      const rect = minion.getBoundingClientRect();
+
+      if (
+        rect.bottom == rect2.top &&
+        (rect.right == rect2.left || rect.right == rect2.left + 10)
+      ) {
+        check1 = false;
+        break; // Exit the loop when the condition is met
+      } else {
+        check1 = true;
+      }
+    }
+  }
+  function checkingRight() {
+    let walls = document.querySelectorAll(".wall");
+    let minion = document.querySelector(".minion");
+
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
+      const rect2 = wall.getBoundingClientRect();
+      const rect = minion.getBoundingClientRect();
+
+      if (
+        rect.right == rect2.left &&
+        (rect.top == rect2.bottom - 10 ||
+          rect.top == rect2.top ||
+          rect.top == rect2.top - 10 ||
+          rect.bottom == rect2.top + 10 ||
+          rect.bottom == rect2.bottom + 10)
+      ) {
+        check1 = false;
+        break; // Exit the loop when the condition is met
+      } else {
+        check1 = true;
+      }
+    }
+  }
+  function checkingLeft() {
+    let walls = document.querySelectorAll(".wall");
+    let minion = document.querySelector(".minion");
+
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
+      const rect2 = wall.getBoundingClientRect();
+      const rect = minion.getBoundingClientRect();
+
+      if (
+        rect.left == rect2.right &&
+        (rect.top == rect2.bottom - 10 ||
+          rect.top == rect2.top ||
+          rect.top == rect2.top - 10 ||
+          rect.bottom == rect2.top + 10 ||
+          rect.bottom == rect2.bottom + 10)
+      ) {
+        check1 = false;
+        break; // Exit the loop when the condition is met
+      } else {
+        check1 = true;
+      }
+    }
+  }
   $(document).keydown(function (e) {
     var position = $(".minion").position();
     var top = position.top;
@@ -7,27 +95,29 @@ $(document).ready(function () {
 
     switch (e.keyCode) {
       case 37: // Left arrow key
-        $(".minion").css("left", left - step);
+        checkingLeft();
+        if (check1) {
+          $(".minion").css("left", left - step);
+        }
         break;
       case 38: // Up arrow key
-        $(".minion").css("top", top - step);
+        checkingTop();
+        if (check1) {
+          $(".minion").css("top", top - step);
+        }
         break;
       case 39: // Right arrow key
-        $(".minion").css("left", left + step);
+        checkingRight();
+        if (check1) {
+          $(".minion").css("left", left + step);
+        }
         break;
       case 40: // Down arrow key
-        $(".minion").css("top", top + step);
+        checkingBottom();
+        if (check1) {
+          $(".minion").css("top", top + step);
+        }
         break;
     }
   });
-  let minion = document.querySelector(".minion");
-  let styles = getComputedStyle(minion);
-
-  const rect = minion.getBoundingClientRect();
-
-  console.log("Element's position on the page:");
-  console.log("Top:", rect.top);
-  console.log("Left:", rect.left);
-  console.log("Bottom:", rect.bottom);
-  console.log("Right:", rect.right);
 });

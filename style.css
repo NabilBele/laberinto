@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(30, 1fr);
   width: fit-content;
-  height: 600px;
   position: relative;
   left: 150px;
 }
@@ -18,10 +17,10 @@
   background-color: white;
 }
 .minion {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-color: transparent;
   position: absolute;
-  top: 0px;
+  top: 8px;
   border-radius: 50%;
 }
