@@ -105,8 +105,15 @@ addEventListener("load", () => {
       const rect = minion.getBoundingClientRect();
       const rect2 = e.getBoundingClientRect();
       if (
-        (rect.left == rect2.left || rect.right == rect2.right - 10) &&
-        (rect.bottom == rect2.bottom || rect.top == rect2.top)
+        (rect.left == rect2.left - 10 ||
+          rect.left == rect2.left ||
+          rect.right == rect2.right - 10 ||
+          rect.right == rect2.right ||
+          rect.left == rect2.right) &&
+        (rect.bottom == rect2.bottom ||
+          rect.top == rect2.top ||
+          rect.bottom == rect2.bottom - 10 ||
+          rect.top == rect2.top - 10)
       ) {
         e.style.display = "none";
         keysCount += 1;
@@ -135,15 +142,19 @@ addEventListener("load", () => {
   }
   ///////to win
   function Win() {
+    var winRound = false;
     var finalWay = document.querySelectorAll(".opened");
     finalWay.forEach((e) => {
       var minion = document.querySelector(".minion");
       const rect = minion.getBoundingClientRect();
       const rect2 = e.getBoundingClientRect();
       if (rect.left == rect2.right) {
-        alert("youWin");
+        winRound = true;
       }
     });
+    if (winRound) {
+      alert("youWin");
+    }
   }
   ////////
   $(document).keydown(function (e) {
