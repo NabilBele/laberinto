@@ -179,5 +179,12 @@ addEventListener("load", () => {
       }
     }
     //
+    //
+    for (let i = 359; i <= 479; i += 30) {
+      if (index == i) {
+        e.classList.add("wall", "exit");
+      }
+    }
+    //
   });
 });
